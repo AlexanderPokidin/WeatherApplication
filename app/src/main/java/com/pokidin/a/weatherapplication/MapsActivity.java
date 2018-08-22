@@ -9,12 +9,14 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     private static final String TAG = "MapsActivity";
 
     private GoogleMap mMap;
+    private  Marker mMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +46,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+
+        mMarker = mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+
+//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
+                mMarker.remove();
+                Log.i(TAG, "mMarker removed");
+
+                mMarker = mMap.addMarker(new MarkerOptions().position(latLng).title("New Marker"));
+                Log.i(TAG, "New mMarker added");
+
+//                mMap.addMarker(new MarkerOptions().position(latLng));
                 Place.newInstance().setCoord(latLng);
                 Log.i(TAG, "latLng: " + latLng);
             }

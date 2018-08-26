@@ -1,4 +1,4 @@
-package com.pokidin.a.weatherapplication;
+package com.pokidin.a.weatherapplication.model;
 
 import com.google.android.gms.maps.model.LatLng;
 

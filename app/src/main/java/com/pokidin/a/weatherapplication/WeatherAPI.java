@@ -9,5 +9,7 @@ import retrofit2.http.Query;
 public interface WeatherAPI {
 
     @GET("/data/2.5/weather")
-    Call<Forecast> getForecast(@Query("lat") String latitude, @Query("lon") String longitude);
+    Call<Forecast> getForecast(@Query("lat") double latitude,
+                               @Query("lon") double longitude,
+                               @Query("appid") String key);
 }

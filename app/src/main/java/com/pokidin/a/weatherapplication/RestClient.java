@@ -4,11 +4,6 @@ import android.util.Log;
 
 import com.pokidin.a.weatherapplication.model.Forecast;
 
-import java.io.IOException;
-
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Response;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -22,13 +17,12 @@ public class RestClient {
     private double lat = 50.45466;
     private double lng = 30.5238;
 
-    public static RestClient instance;
+    private static RestClient instance;
 
-    public static RestClient getInstance(){
-        if (instance == null){
+    public static void getInstance() {
+        if (instance == null) {
             instance = new RestClient();
         }
-        return instance;
     }
 
     private RestClient() {
@@ -42,7 +36,6 @@ public class RestClient {
             @Override
             public void onResponse(Call<Forecast> call, retrofit2.Response<Forecast> response) {
                 Log.i(TAG, "" + response);
-
             }
 
             @Override
@@ -51,6 +44,4 @@ public class RestClient {
             }
         });
     }
-
-
 }
